@@ -9,7 +9,8 @@
       <div class="col-md-4">
         <div class="list-group">
           <a href="#" class="list-group-item list-group-item-action"
-            v-for="product in products" :key="product.name">
+            v-for="product in products" :key="product.name"
+            @click.prevent="selectProduct(product)">
             <h6 class="card-title mb-1">{{ product.name }}</h6>
             <div class="d-flex align-items-center justify-content-between">
               <p class="mb-0"><small>{{ product.engName }}</small></p>
@@ -24,7 +25,7 @@
           <div class="card-body px-4">
             <div class="mb-3">
               <label for="productNum" class="form-label">數量</label>
-              <input type="number" class="form-control" id="productNum" placeholder="數量" min="0">
+              <input type="number" v-model="tempProduct.count" class="form-control" id="productNum" placeholder="數量" min="0">
             </div>
             <div class="mb-3">
               <label for="productNum" class="form-label d-block">冰塊*</label>
@@ -132,6 +133,7 @@
 const App = {
   data() {
     return {
+      tempProduct: {},
       iceType: ['正常冰', '少冰', '微冰', '去冰', '熱'],
       sugarType: ['全糖', '七分', '半糖', '三分', '無糖'],
       toppingsType: ['珍珠', '粉條', '小粉圓', '椰果', '芋頭'],
@@ -249,6 +251,24 @@ const App = {
       ],
     }
   },
+
+  methods: {
+      selectProduct(product) {
+          this.tempProduct = this.createProduct(product);
+      },
+
+      createProduct(product) {
+          defaults = product.defaults;
+
+          return {
+              count: '1',
+              ice: defaults.ice ? defaults.ice : this.iceType[0],
+              sugar: defaults.sugar ? defaults.sugar : this.sugarType[0],
+              toppings: [],
+              ... product
+          };
+      }
+  }
 };
 
 Vue.createApp(App).mount('#app');
