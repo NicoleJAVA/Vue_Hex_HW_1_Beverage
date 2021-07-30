@@ -25,7 +25,8 @@
           <div class="card-body px-4">
             <div class="mb-3">
               <label for="productNum" class="form-label">數量</label>
-              <input type="number" v-model="tempProduct.count" class="form-control" id="productNum" placeholder="數量" min="0">
+              <input type="number" v-model.number="tempProduct.count" class="form-control" 
+                id="productNum" placeholder="數量" min="0" type="number">
             </div>
             <div class="mb-3">
               <label class="form-label d-block">冰塊*</label>
@@ -58,7 +59,8 @@
             </div>
             <div class="d-flex gap-2">
               <button class="btn btn-outline-primary w-100" type="button">取消</button>
-              <button class="btn btn-primary w-100" type="button">加入</button>
+              <button class="btn btn-primary w-100" type="button" 
+              @click="addToOrder(tempProduct)">加入</button>
             </div>
           </div>
         </div>
@@ -77,20 +79,20 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">珍珠鮮奶茶<br>
-                    <small class="text-muted fw-normal">備註：阿姨，我不想努力了</small>
+                <tr v-for="(item, key) in orderList" :key="'order' + key">
+                  <th scope="row">{{ item.name }}<br>
+                    <small class="text-muted fw-normal">{{ item.notice }}</small>
                   </th>
-                  <td>正常冰</td>
-                  <td>全糖</td>
-                  <td>椰果</td>
-                  <td>70</td>
-                  <td>1</td>
-                  <td class="text-end">70</td>
+                  <td>{{ item.ice }}</td>
+                  <td>{{ item.sugar }}</td>
+                  <td>{{ item.toppings.sort().toString() }}</td>
+                  <td>{{ item.subtotal }}</td>
+                  <td>{{ item.count }}</td>
+                  <td class="text-end">{{ item.totalPrice }}</td>
                 </tr>
               </tbody>
             </table>
-            <p class="text-end">共 NT$ 70 元</p>
+            <p class="text-end">共 NT$ {{ orderTotal }} 元</p>
             <button class="btn btn-sm btn-secondary w-100">產生訂單</button>
           </div>
         </div>

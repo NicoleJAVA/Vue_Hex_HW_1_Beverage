@@ -2,6 +2,8 @@ const App = {
     data() {
       return {
         tempProduct: {},
+        orderList: [],
+        orderTotal: 0,
         iceType: ['正常冰', '少冰', '微冰', '去冰', '熱'],
         sugarType: ['全糖', '七分', '半糖', '三分', '無糖'],
         toppingsType: ['珍珠', '粉條', '小粉圓', '椰果', '芋頭'],
@@ -67,7 +69,7 @@ const App = {
             }
           },
           {
-            name: '檸檬烏龍(冰塊固定)',
+            name: '檸檬烏龍 (冰塊固定)',
             engName: 'Lemon Oolong Tea',
             price: 55,
             defaults: {
@@ -121,6 +123,53 @@ const App = {
     },
   
     methods: {
+        reset() {
+          this.tempProduct = {};
+        },
+
+        addToOrder(product) {
+          let productString = this.stringifyProduct(product);
+          let dupIndex = this.getDuplicateIndex(productString);
+
+          if (dupIndex >= 0) {
+            this.orderList[dupIndex].count += product.count;
+            this.orderList[dupIndex].totalPrice
+              = this.orderList[dupIndex].count * this.orderList[dupIndex].subtotal;
+          } else {
+            let subtotal = product.price + 10 * product.toppings.length;
+            this.orderList.push(Object.assign({}, {
+              ...product,
+              subtotal: subtotal,
+              totalPrice: subtotal *  product.count,
+              productString: productString
+            }))
+          }
+
+          this.computeTotalPrice();
+          this.reset();
+        },
+        
+        stringifyProduct(product) {
+          let clonedProduct = Object.assign({}, {...product});
+          delete clonedProduct.count;
+          clonedProduct.toppings.sort();
+          
+          return JSON.stringify(clonedProduct);
+        },
+
+        getDuplicateIndex(productString) {
+          for (i = 0; i < this.orderList.length; i ++) {
+            if (this.orderList[i].productString === productString) return i;
+          }
+
+          return -1;
+        },
+
+        computeTotalPrice() {
+          this.orderTotal = this.orderList.reduce((accumulator, item) =>
+            accumulator + item.totalPrice, 0);
+        },
+
         selectProduct(product) {
             this.tempProduct = this.createProduct(product);
         },
@@ -129,7 +178,7 @@ const App = {
             defaults = product.defaults;
   
             return {
-                count: '1',
+                count: 1,
                 ice: defaults.ice ? defaults.ice : this.iceType[0],
                 sugar: defaults.sugar ? defaults.sugar : this.sugarType[0],
                 toppings: [],
@@ -164,3 +213,4 @@ const App = {
   };
   
   Vue.createApp(App).mount('#app');
+  
