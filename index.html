@@ -28,7 +28,7 @@
               <input type="number" v-model="tempProduct.count" class="form-control" id="productNum" placeholder="數量" min="0">
             </div>
             <div class="mb-3">
-              <label for="productNum" class="form-label d-block">冰塊*</label>
+              <label class="form-label d-block">冰塊*</label>
               <div class="form-check form-check-inline" v-for="(ice, key) in iceType" :key="ice">
                   <input class="form-check-input" name="iceType" type="radio" :id="'ice' + key" 
                     :value="ice" v-model="tempProduct.ice" :disabled="!isValidIce(ice)">
@@ -36,14 +36,14 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="productNum" class="form-label d-block">甜度*</label>
+              <label class="form-label d-block">甜度*</label>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" name="sugarType" type="radio" id="全糖">
                 <label class="form-check-label" for="全糖">全糖</label>
               </div>
             </div>
             <div class="mb-3">
-              <label for="productNum" class="form-label d-block">加料</label>
+              <label class="form-label d-block">加料</label>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="椰果">
                 <label class="form-check-label" for="椰果">椰果</label>
