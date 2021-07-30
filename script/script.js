@@ -151,6 +151,14 @@ const App = {
           if (this.tempProduct.defaults.sugar === '') return true;
           
           return this.tempProduct.defaults.sugar === sugar;
+        },
+
+        isValidTopping(topping) {
+          if (!this.tempProduct.hasOwnProperty('defaults')) return false;
+
+          if (this.tempProduct.defaults.toppings.includes(topping)) return false;
+
+          return true;
         }
     }
   };
