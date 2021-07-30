@@ -67,13 +67,13 @@ const App = {
             }
           },
           {
-            name: '檸檬烏龍',
+            name: '檸檬烏龍(冰塊固定)',
             engName: 'Lemon Oolong Tea',
             price: 55,
             defaults: {
               toppings: [''],
               sugar: '',
-              ice: '',
+              ice: '少冰',
             }
           },
           {
@@ -135,6 +135,14 @@ const App = {
                 toppings: [],
                 ... product
             };
+        },
+
+        isValidIce(ice) {
+          if (!this.tempProduct.hasOwnProperty('defaults')) return false;
+
+          if (this.tempProduct.defaults.ice === '') return true;
+          
+          return this.tempProduct.defaults.ice === ice;
         }
     }
   };

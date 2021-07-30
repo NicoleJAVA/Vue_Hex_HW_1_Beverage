@@ -29,9 +29,10 @@
             </div>
             <div class="mb-3">
               <label for="productNum" class="form-label d-block">冰塊*</label>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" name="iceType" type="radio" id="正常冰">
-                <label class="form-check-label" for="正常冰">正常冰</label>
+              <div class="form-check form-check-inline" v-for="(ice, key) in iceType" :key="ice">
+                  <input class="form-check-input" name="iceType" type="radio" :id="'ice' + key" 
+                    :value="ice" v-model="tempProduct.ice" :disabled="!isValidIce(ice)">
+                  <label class="form-check-label" :for="'ice' + key">{{ ice }}</label>
               </div>
             </div>
             <div class="mb-3">
