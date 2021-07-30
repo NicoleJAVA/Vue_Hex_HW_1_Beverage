@@ -143,6 +143,14 @@ const App = {
           if (this.tempProduct.defaults.ice === '') return true;
           
           return this.tempProduct.defaults.ice === ice;
+        },
+
+        isValidSugar(sugar) {
+          if (!this.tempProduct.hasOwnProperty('defaults')) return false;
+
+          if (this.tempProduct.defaults.sugar === '') return true;
+          
+          return this.tempProduct.defaults.sugar === sugar;
         }
     }
   };

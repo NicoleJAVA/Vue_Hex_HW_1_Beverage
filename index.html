@@ -37,9 +37,10 @@
             </div>
             <div class="mb-3">
               <label class="form-label d-block">甜度*</label>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" name="sugarType" type="radio" id="全糖">
-                <label class="form-check-label" for="全糖">全糖</label>
+              <div class="form-check form-check-inline" v-for="(sugar, key) in sugarType" :key="'sugar' + key">
+                <input class="form-check-input" name="sugarType" type="radio" :id="'sugar' + key"
+                  :value="sugar" v-model="tempProduct.sugar" :disabled="!isValidSugar(sugar)">
+                <label class="form-check-label" :for="'sugar' + key">{{ sugar }}</label>
               </div>
             </div>
             <div class="mb-3">
