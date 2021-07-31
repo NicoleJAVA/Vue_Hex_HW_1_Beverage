@@ -186,6 +186,10 @@ const App = {
             };
         },
 
+        isInSelectionMode() {
+          return this.tempProduct.hasOwnProperty('name');
+        },
+
         isValidIce(ice) {
           if (!this.tempProduct.hasOwnProperty('defaults')) return false;
 
