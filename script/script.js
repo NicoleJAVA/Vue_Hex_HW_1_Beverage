@@ -1,6 +1,11 @@
 const App = {
     data() {
       return {
+        checkedOrder:{
+          date: '',
+          items: [],
+          total: 0
+        },
         tempProduct: {},
         orderList: [],
         orderTotal: 0,
@@ -168,6 +173,16 @@ const App = {
         computeTotalPrice() {
           this.orderTotal = this.orderList.reduce((accumulator, item) =>
             accumulator + item.totalPrice, 0);
+        },
+
+        generateOrder(items, total) {
+          const date = new Date().toLocaleString();
+          this.checkedOrder.date = date;
+          this.checkedOrder.items = items;
+          this.checkedOrder.total = total;
+          this.orderTotal = 0;
+          this.orderList = [];
+          this.reset();
         },
 
         selectProduct(product) {
