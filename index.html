@@ -9,6 +9,7 @@
       <div class="col-md-4">
         <div class="list-group">
           <a href="#" class="list-group-item list-group-item-action"
+            :class="{ 'active' : tempProduct.name === product.name }"
             v-for="product in products" :key="product.name"
             @click.prevent="selectProduct(product)">
             <h6 class="card-title mb-1">{{ product.name }}</h6>
