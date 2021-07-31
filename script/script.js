@@ -185,7 +185,7 @@ const App = {
           this.reset();
         },
 
-        selectProduct(product) {
+        onProductSelected(product) {
             this.tempProduct = this.createProduct(product);
         },
   

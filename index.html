@@ -11,7 +11,7 @@
           <a href="#" class="list-group-item list-group-item-action"
             :class="{ 'active' : tempProduct.name === product.name }"
             v-for="product in products" :key="product.name"
-            @click.prevent="selectProduct(product)">
+            @click.prevent="onProductSelected(product)">
             <h6 class="card-title mb-1">{{ product.name }}</h6>
             <div class="d-flex align-items-center justify-content-between">
               <p class="mb-0"><small>{{ product.engName }}</small></p>
