@@ -60,7 +60,7 @@
             </div>
             <div class="mb-3">
               <label for="productNotice" class="form-label">備註</label>
-              <textarea class="form-control" id="productNotice" rows="2"></textarea>
+              <textarea class="form-control" id="productNotice" rows="2" v-model="tempProduct.remark"></textarea>
             </div>
             <div class="d-flex gap-2">
               <button class="btn btn-outline-primary w-100" type="button" @click="reset">取消</button>

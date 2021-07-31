@@ -182,6 +182,7 @@ const App = {
                 ice: defaults.ice ? defaults.ice : this.iceType[0],
                 sugar: defaults.sugar ? defaults.sugar : this.sugarType[0],
                 toppings: [],
+                remark: '',
                 ... product
             };
         },
