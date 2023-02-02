@@ -143,6 +143,8 @@ const App = {
           } else {
             let subtotal = product.price + 10 * product.toppings.length;
             this.orderList.push(Object.assign({}, {
+      // dupIndex: 例如，曾經加入過包種青茶，而現在又再加入包種青茶
+      // 那就要找到包種青茶的 index，並把 subtotal 加到 total 內
               ...product,
               subtotal: subtotal,
               totalPrice: subtotal *  product.count,
