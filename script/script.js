@@ -223,11 +223,16 @@ const App = {
           
           return this.tempProduct.defaults.sugar === sugar;
         },
+      // 例如：包種青茶預設冰度為空白字串 ''，那就要讓所有冰度都設為可選的
+      // 例如：薑母茶有預設冰度為「熱」，所以要預設「熱」為可選的
+      // 但其他冰度就要設為不可選的
 
         isValidTopping(topping) {
           if (!this.tempProduct.hasOwnProperty('defaults')) return false;
 
           if (this.tempProduct.defaults.toppings.includes(topping)) return false;
+      // 例如：珍珠鮮奶茶本身就已經有加珍珠了，
+      // 所以就不要再讓使用者可以勾選珍珠，要把珍珠設為 disabled
 
           return true;
         }
